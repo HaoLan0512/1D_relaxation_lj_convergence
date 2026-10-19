@@ -84,7 +84,7 @@ The continuum figure is the same in both cases. The existing compiled
 convergence figures, which display `N=320` through `N=10240`.
 The default dataset and outputs are under `outputs/lj_step_convergence/`.
 
-Figure numbers below follow [paper link](https://arxiv.org/abs/2609.37943)
+Figure numbers below follow [Continuum Limit for One-Dimensional Moiré Relaxation](https://arxiv.org/abs/2609.37943)
 
 | Manuscript figure | PNG preview | PDF |
 | --- | --- | --- |
