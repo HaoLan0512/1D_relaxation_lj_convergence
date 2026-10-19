@@ -85,18 +85,21 @@ python main.py --plot N=320
 ```
 
 Plain `python main.py` instead shows the full range starting at `N=20`.
-The continuum figure is the same in both cases. The default dataset and outputs
-are under `outputs/lj_step_convergence/`:
+The continuum figure is the same in both cases. The existing compiled
+`Continuum_Limit_v5.pdf` includes smaller grid sizes than the supplied
+convergence figures, which display `N=320` through `N=10240`.
+The default dataset and outputs are under `outputs/lj_step_convergence/`.
 
-The linked [arXiv v1](https://arxiv.org/abs/2609.37943v1) does not contain these
-figures. The table identifies the accompanying numerical examples by purpose
-and filename, without assigning manuscript figure numbers.
+Figure numbers below follow the revised manuscript `Continuum_Limit_v5.tex`,
+intended for the forthcoming arXiv v2. The same
+[paper link](https://arxiv.org/abs/2609.37943) will provide the revised version
+after upload; arXiv v1 does not contain these figures.
 
-| Figure | PNG preview | PDF |
+| Manuscript figure | PNG preview | PDF |
 | --- | --- | --- |
-| Normalized continuum profile with relative-displacement inset | [v_phase_fixed.png](outputs/lj_step_convergence/figures/v_phase_fixed.png) | [v_phase_fixed.pdf](outputs/lj_step_convergence/figures/v_phase_fixed.pdf) |
-| Phase-matched two-layer displacement errors and first-order rate guides | [convergence_loglog.png](outputs/lj_step_convergence/figures/convergence_loglog.png) | [convergence_loglog.pdf](outputs/lj_step_convergence/figures/convergence_loglog.pdf) |
-| Reconstructed relative-displacement errors and second-order rate guides | [relative_convergence_loglog.png](outputs/lj_step_convergence/figures/relative_convergence_loglog.png) | [relative_convergence_loglog.pdf](outputs/lj_step_convergence/figures/relative_convergence_loglog.pdf) |
+| **Figure 1.** Normalized continuum profile with relative-displacement inset | [v_phase_fixed.png](outputs/lj_step_convergence/figures/v_phase_fixed.png) | [v_phase_fixed.pdf](outputs/lj_step_convergence/figures/v_phase_fixed.pdf) |
+| **Figure 2.** Phase-matched pair errors: (a) discrete $H_h^2$, (b) maximum norm; first-order rate guides | [convergence_loglog.png](outputs/lj_step_convergence/figures/convergence_loglog.png) | [convergence_loglog.pdf](outputs/lj_step_convergence/figures/convergence_loglog.pdf) |
+| **Figure 3.** Reconstructed relative-displacement errors: (a) continuous $H^2$, (b) maximum norm; second-order rate guides | [relative_convergence_loglog.png](outputs/lj_step_convergence/figures/relative_convergence_loglog.png) | [relative_convergence_loglog.pdf](outputs/lj_step_convergence/figures/relative_convergence_loglog.pdf) |
 
 The [tables folder](outputs/lj_step_convergence/tables/) contains all saved error
 values, fitted slopes, adjacent rates, accuracy budgets, and endpoint diagnostics.

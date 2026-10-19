@@ -315,11 +315,23 @@ is extrapolated or silently accepted.
 
 ## Figures and interpretation
 
-The supplied figures are accompanying numerical examples; the linked
-[arXiv v1](https://arxiv.org/abs/2609.37943v1) does not contain them. The
-[root output table](../../README.md#generated-files) maps their purposes to
-PNG/PDF filenames. Reproduce their displayed range with
-`python experiments/lj_step_convergence/main.py --plot N=320`.
+The figure numbers below follow the revised manuscript `Continuum_Limit_v5.tex`,
+intended for the forthcoming arXiv v2. Use the same
+[paper link](https://arxiv.org/abs/2609.37943) for the revised version after
+upload; arXiv v1 does not contain these figures.
+
+| Manuscript figure | Output stem (PNG and PDF) | Content and panels |
+| --- | --- | --- |
+| **Figure 1** | `v_phase_fixed` | Normalized continuum profile $v_0$; inset $u_1-u_2=v_0-x$. |
+| **Figure 2** | `convergence_loglog` | Phase-matched pair errors: (a) discrete $H_h^2$ norm, (b) maximum norm; $N^{-1}$ guides. |
+| **Figure 3** | `relative_convergence_loglog` | Reconstructed relative-displacement errors: (a) continuous $H^2$ norm, (b) maximum norm; $N^{-2}$ guides. |
+
+The [root output table](../../README.md#generated-files) links each PNG/PDF.
+Reproduce the supplied figures' displayed range with
+`python experiments/lj_step_convergence/main.py --plot N=320`. The existing
+compiled `Continuum_Limit_v5.pdf` displays a wider convergence range than these
+saved files. Plain `python experiments/lj_step_convergence/main.py` displays
+all supplied sizes from `N=20`. The continuum figure is unchanged by the cutoff.
 
 Figures show the blue continuum profile with $q=v_0-x$ inset, pair errors,
 and reconstructed relative-displacement errors. Each convergence panel has one
