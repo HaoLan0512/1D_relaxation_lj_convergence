@@ -51,11 +51,9 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-If you already have an environment containing the pinned dependencies, activate
-it and run `python main.py`. For example, users of the original CLR
-`relax` environment can run `conda activate relax` first. Use
-`python -c "import sys; print(sys.executable)"` to check which interpreter is
-active if a dependency fails to import.
+If you already have a Python 3.12 environment with the dependencies listed in
+`requirements.txt`, activate it and run `python main.py`. Otherwise, follow
+the installation steps above.
 
 ## Choose the first plotted size
 
@@ -166,6 +164,17 @@ compatible dataset, `--prepare` only renders the saved results.
 The included convergence results are numerical observations for this fixed
 experiment. They do not certify global minimizers or constitute convergence
 proofs.
+
+## Troubleshooting
+
+If a dependency fails to import, check which Python interpreter is active:
+
+```text
+python -c "import sys; print(sys.executable)"
+```
+
+The printed path should point to the environment where you installed the
+dependencies. Activate that environment and rerun `python main.py`.
 
 ## Citation
 
