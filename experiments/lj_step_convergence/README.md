@@ -1,5 +1,11 @@
 # LJ step profile and convergence
 
+Numerical examples accompanying
+[Continuum Limit for One-Dimensional Moiré Relaxation](https://arxiv.org/abs/2609.37943)
+by Hao Lan, Michael Hott, Jeff Calder, and Alexander B. Watson (2026).
+See the [root README](../../README.md) for installation, output links, and the
+[paper citation](../../README.md#citation).
+
 This self-contained experiment reproduces a continuum profile and two
 atomistic-to-continuum convergence figures from supplied profiles, using
 the fixed Lennard--Jones model:
@@ -17,10 +23,21 @@ high-precision calculations do not inherit rounded binary64 parameters.
 
 ## Run and distribute
 
-Use a Python environment containing the packages in `requirements.txt`; commands
-never install dependencies. Run these examples from the package root containing
+Start with the [root installation guide](../../README.md#download-and-run):
+download the entire repository, use Python 3.12, and install the pinned packages
+in an isolated environment. The pins describe the tested environment; the
+program does not enforce exact dependency-version matches. Missing or
+incompatible packages can still cause import or runtime errors, and commands
+never install dependencies themselves.
+
+Run these examples from the package root containing
 `experiments/` and `outputs/`. Double-clicking uses the operating system's Python
 association; configure it or select the intended environment in an IDE.
+
+The root `main.py` forwards arguments to this experiment's `main.py`. With the
+same arguments, dataset, and environment, both entry points produce the same
+results. For example, `python main.py --plot N=320` is equivalent to
+`python experiments/lj_step_convergence/main.py --plot N=320` from the root.
 
 ### Commands and overwrite behavior
 
@@ -68,6 +85,11 @@ python experiments/lj_step_convergence/main.py --plot N=320
 python experiments/lj_step_convergence/main.py --plot N=1280
 python experiments/lj_step_convergence/main.py --plot N=320 --data-dir outputs/lj_step_convergence_fresh
 ```
+
+The supplied convergence PNGs/PDFs use `N=320` as the first plotted size. Use
+`--plot N=320` to reproduce their displayed range; plain execution shows the
+full range from `N=20`. The continuum figure is unchanged. See the
+[output-file links](../../README.md#generated-files) for previews and PDFs.
 
 Accepted starting values are `20, 40, 80, 160, 320, 640, 1280`, including `1280`.
 Use the literal `N=integer` format. A malformed value, a value outside the study's
@@ -149,8 +171,15 @@ New profiles paired with an old manifest generally fail integrity checks.
 
 ### Files to distribute
 
-Distribute both complete folders; no other repository code or outputs are needed.
-Retain all Python files and every profile listed in the manifest.
+For readers, distribute or download the entire repository, including the root
+`main.py`, `requirements.txt`, and README, to retain the documented quick start.
+
+For a minimal manual distribution using
+`python experiments/lj_step_convergence/main.py`, the two complete folders below
+are sufficient. This minimal layout omits the root launcher, so `python main.py`
+from its root is unavailable. Retain all experiment Python files and every
+profile listed in the manifest; no files from the larger CLR repository are
+required.
 
 ```text
 experiments/lj_step_convergence/
@@ -190,11 +219,13 @@ comments identify adapted formulas.
 
 Write $q=v_0-x$. The normalized continuum profile satisfies
 
-\[
- v_0(0)=0,\qquad v_0(x+2\pi)=v_0(x)+2\pi,\qquad
- v_0'=\sqrt{2(W(v_0)+c)},\qquad
+```math
+\begin{gathered}
+ v_0(0)=0,\qquad v_0(x+2\pi)=v_0(x)+2\pi,\\
+ v_0'=\sqrt{2(W(v_0)+c)},\\
  \int_{-\pi}^{\pi}\frac{ds}{\sqrt{2(W(s)+c)}}=2\pi.
-\]
+\end{gathered}
+```
 
 Analytic Fourier periodization supplies the potential; scalar traversal time
 determines the profile. Refinement allows Fourier degrees 64, 128, 256, and 512.
@@ -236,10 +267,12 @@ rather than stored redundantly.
 
 For each fixed atomistic state, define
 
-\[
- \delta_N=\langle u_d^2\rangle-\langle u_d^1\rangle,\qquad
+```math
+\begin{gathered}
+ \delta_N=\langle u_d^2\rangle-\langle u_d^1\rangle,\\
  q_{\delta_N}(x)=q(x-\delta_N)-\delta_N.
-\]
+\end{gathered}
+```
 
 Means are arithmetic means on the native grids. Pair errors compare the native
 states with $(q_{\delta_N}/2,-q_{\delta_N}/2)$ on their respective grids. The
@@ -250,10 +283,10 @@ absolute nodal error over both layers. Here $h=4\pi/(2N+1)$.
 Let $\mathcal T_M$ be periodic Fourier reconstruction from $M$ native samples.
 The relative-displacement error is
 
-\[
+```math
  e_N^{\mathrm{rel}}(x)=\mathcal T_Nu_d^1(x)
  -\mathcal T_{N+1}u_d^2(x)-q_{\delta_N}(x).
-\]
+```
 
 It is measured in continuous $H^2$ and maximum norms. “Relative” means the
 difference between layers, not division by a reference norm. Reconstructions
@@ -281,6 +314,12 @@ separately. These checks are numerical sensitivities, not rigorous bounds.
 is extrapolated or silently accepted.
 
 ## Figures and interpretation
+
+The supplied figures are accompanying numerical examples; the linked
+[arXiv v1](https://arxiv.org/abs/2609.37943v1) does not contain them. The
+[root output table](../../README.md#generated-files) maps their purposes to
+PNG/PDF filenames. Reproduce their displayed range with
+`python experiments/lj_step_convergence/main.py --plot N=320`.
 
 Figures show the blue continuum profile with $q=v_0-x$ inset, pair errors,
 and reconstructed relative-displacement errors. Each convergence panel has one
