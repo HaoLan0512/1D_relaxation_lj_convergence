@@ -55,7 +55,7 @@ If you already have a Python 3.12 environment with the dependencies listed in
 `requirements.txt`, activate it and run `python main.py`. Otherwise, follow
 the installation steps above.
 
-## Choose the first plotted size
+## Choose the convergence plotted size
 
 ```text
 python main.py
@@ -88,10 +88,7 @@ The continuum figure is the same in both cases. The existing compiled
 convergence figures, which display `N=320` through `N=10240`.
 The default dataset and outputs are under `outputs/lj_step_convergence/`.
 
-Figure numbers below follow the revised manuscript `Continuum_Limit_v5.tex`,
-intended for the forthcoming arXiv v2. The same
-[paper link](https://arxiv.org/abs/2609.37943) will provide the revised version
-after upload; arXiv v1 does not contain these figures.
+Figure numbers below follow [paper link](https://arxiv.org/abs/2609.37943)
 
 | Manuscript figure | PNG preview | PDF |
 | --- | --- | --- |
@@ -124,7 +121,7 @@ requirements.txt                 # Forwards the experiment's pinned dependency l
 experiments/lj_step_convergence/  # Self-contained source and detailed documentation
 outputs/lj_step_convergence/
   profiles/                      # One continuum and twelve atomistic bundles
-  publication_manifest.json      # Configuration and profile integrity hashes
+  publication_manifest.json      # Configuration and profile integrity information
   verification.json              # Saved numerical validation evidence
   figures/
   tables/
@@ -142,9 +139,6 @@ python main.py --plot N=320
 python experiments/lj_step_convergence/main.py --plot N=320
 ```
 
-The code locates the default dataset relative to its source; no original CLR
-checkout or machine-specific data path is required.
-
 ## Numerical details and advanced modes
 
 See the [experiment README](experiments/lj_step_convergence/README.md) for the
@@ -157,24 +151,10 @@ values; it does not repeat that numerical validation.
 
 `--prepare` explicitly constructs or resumes profiles in a new data folder.
 Fresh preparation is expensive and has a cumulative eight-hour numerical
-budget. Use the detailed instructions before starting it. With a complete,
+budget. Use the detailed instructions [experiment README](experiments/lj_step_convergence/README.md) 
+before starting it. With a complete,
 compatible dataset, `--prepare` only renders the saved results.
 `--plot`, `--verify`, and `--prepare` are mutually exclusive.
-
-The included convergence results are numerical observations for this fixed
-experiment. They do not certify global minimizers or constitute convergence
-proofs.
-
-## Troubleshooting
-
-If a dependency fails to import, check which Python interpreter is active:
-
-```text
-python -c "import sys; print(sys.executable)"
-```
-
-The printed path should point to the environment where you installed the
-dependencies. Activate that environment and rerun `python main.py`.
 
 ## Citation
 
