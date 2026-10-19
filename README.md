@@ -24,11 +24,7 @@ cd 1D_relaxation_lj_convergence
 If you downloaded the ZIP, open a terminal in the extracted repository folder
 containing `main.py` before running the commands below.
 
-Use **Python 3.12**; the supplied results were prepared with Python 3.12.12.
-The five numerical dependencies are pinned in the included requirements file.
-Install them into an isolated environment.
-
-These versions specify the tested environment. The program does not enforce
+The supplied results were prepared with Python 3.12.12. The program does not enforce
 exact dependency-version matches, but missing or incompatible packages can
 cause import or runtime errors. Downloading the ZIP does not install Python
 or the dependencies.
