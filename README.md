@@ -1,4 +1,4 @@
-# LJ step profile and convergence
+# 1D Relaxation LJ step profile and convergence
 
 A standalone package for reproducing a continuum profile and two
 atomistic-to-continuum convergence figures for a fixed Lennard-Jones model.
