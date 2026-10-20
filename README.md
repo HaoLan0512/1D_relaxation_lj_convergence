@@ -59,7 +59,7 @@ existing results without new optimization.
 ## Generated files
 
 The default dataset and outputs are in `outputs/lj_step_convergence/`.
-Figure numbers refer to the associated paper.
+Figure numbers refer to the [associated paper](https://arxiv.org/abs/2609.37943).
 
 | Manuscript figure | PNG | PDF |
 | --- | --- | --- |
