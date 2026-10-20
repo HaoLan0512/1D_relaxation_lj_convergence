@@ -1,33 +1,21 @@
 # 1D Relaxation LJ step profile and convergence
 
-A standalone package for reproducing a continuum profile and two
-atomistic-to-continuum convergence figures for a fixed Lennard-Jones model.
-The repository includes all required source code and the saved, validated
-profiles. Ordinary execution reads those profiles and generates figures;
-it does not run a new optimization.
-
-These numerical examples accompany
-[Continuum Limit for One-Dimensional Moiré Relaxation](https://arxiv.org/abs/2609.37943)
-by Hao Lan, Michael Hott, Jeff Calder, and Alexander B. Watson (2026).
-See [Citation](#citation) for a copyable reference.
+A standalone package reproducing a continuum profile and two atomistic-to-continuum
+convergence figures for a fixed Lennard-Jones model. Source code and validated
+profiles are included; ordinary execution generates figures without new optimization.
+The examples accompany [Continuum Limit for One-Dimensional Moiré Relaxation](https://arxiv.org/abs/2609.37943).
 
 ## Download and run
 
-Download this repository using **Code > Download ZIP** and extract the entire
-archive, or clone it:
+Download **Code > Download ZIP** and extract the entire repository, or clone it:
 
 ```text
 git clone https://github.com/HaoLan0512/1D_relaxation_lj_convergence.git
 cd 1D_relaxation_lj_convergence
 ```
 
-If you downloaded the ZIP, open a terminal in the extracted repository folder
-containing `main.py` before running the commands below.
-
-The supplied results were prepared with Python 3.12.12. The program does not enforce
-exact dependency-version matches, but missing or incompatible packages can
-cause import or runtime errors. Downloading the ZIP does not install Python
-or the dependencies.
+Install Python 3.12, then open a terminal in the repository folder containing
+`main.py`. Create an environment, install dependencies, and run:
 
 Windows Command Prompt:
 
@@ -47,118 +35,57 @@ python -m pip install -r requirements.txt
 python main.py
 ```
 
-If you already have a Python 3.12 environment with the dependencies listed in
-`requirements.txt`, activate it and run `python main.py`. Otherwise, follow
-the installation steps above.
+## Commands
 
-## Choose the convergence plotted size
+Run these commands from the repository root with your environment active.
 
-```text
-python main.py
-python main.py --plot N=320
-python main.py --plot N=1280
-```
+| Command | Role |
+| --- | --- |
+| `python main.py` | Generate figures and tables from supplied profiles; convergence plots start at `N=20`. |
+| `python main.py --plot N=320` | Start both convergence plots at `N=320`, matching the supplied figures' displayed range. |
+| `python main.py --data-dir PATH` | Use another complete, compatible dataset for both input and output; replace `PATH` with its folder. |
+| `python main.py --verify` | Recheck saved states without optimization and update `verification.json`. |
+| `python main.py --prepare --data-dir outputs/new_run` | Construct or resume a dataset; expensive. Read the [preparation guide](experiments/lj_step_convergence/README.md#changing-lj-parameters-and-fresh-calculation). |
+| `python main.py --help` | Display available options. |
 
-The default starts at `N=20`. The accepted starting values are
-`20, 40, 80, 160, 320, 640, 1280`. Both convergence figures show all supplied
-sizes greater than or equal to the selected value, up to `N=10240`.
-Axes and rate guides adapt to the displayed range while figure dimensions stay
-fixed. Invalid values exit with an error before any output is written.
+Accepted plotting cutoffs: `20, 40, 80, 160, 320, 640, 1280`. Both convergence
+figures include supplied sizes at or above the cutoff, through `10240`; profiles,
+the continuum figure, full-data tables, and fits are unchanged.
 
-This option changes only the convergence figures. The continuum figure,
-profiles, full-data tables, and fits are unchanged. The predefined fit uses
-`N=1280,2560,5120,10240`. Gray curves are rate guides, not fitted curves.
+`--plot`, `--verify`, and `--prepare` are mutually exclusive; `--data-dir` can
+accompany any mode. With complete, compatible data, preparation renders
+existing results without new optimization.
 
 ## Generated files
 
-The supplied convergence figures start at `N=320`. To reproduce that displayed
-range in all supplied figures, run:
+The default dataset and outputs are in `outputs/lj_step_convergence/`.
+Figure numbers refer to the associated paper.
 
-```text
-python main.py --plot N=320
-```
-
-Plain `python main.py` instead shows the full range starting at `N=20`.
-The continuum figure is the same in both cases. The existing compiled
-`Continuum_Limit_v5.pdf` includes smaller grid sizes than the supplied
-convergence figures, which display `N=320` through `N=10240`.
-The default dataset and outputs are under `outputs/lj_step_convergence/`.
-
-Figure numbers below follow [Continuum Limit for One-Dimensional Moiré Relaxation](https://arxiv.org/abs/2609.37943)
-
-| Manuscript figure | PNG preview | PDF |
+| Manuscript figure | PNG | PDF |
 | --- | --- | --- |
-| **Figure 1.** Normalized continuum profile with relative-displacement inset | [v_phase_fixed.png](outputs/lj_step_convergence/figures/v_phase_fixed.png) | [v_phase_fixed.pdf](outputs/lj_step_convergence/figures/v_phase_fixed.pdf) |
-| **Figure 2.** Phase-matched pair errors: (a) discrete $H_h^2$, (b) maximum norm; first-order rate guides | [convergence_loglog.png](outputs/lj_step_convergence/figures/convergence_loglog.png) | [convergence_loglog.pdf](outputs/lj_step_convergence/figures/convergence_loglog.pdf) |
-| **Figure 3.** Reconstructed relative-displacement errors: (a) continuous $H^2$, (b) maximum norm; second-order rate guides | [relative_convergence_loglog.png](outputs/lj_step_convergence/figures/relative_convergence_loglog.png) | [relative_convergence_loglog.pdf](outputs/lj_step_convergence/figures/relative_convergence_loglog.pdf) |
+| **Figure 1.** Continuum profile and relative-displacement inset | [PNG](outputs/lj_step_convergence/figures/v_phase_fixed.png) | [PDF](outputs/lj_step_convergence/figures/v_phase_fixed.pdf) |
+| **Figure 2.** Phase-matched pair errors | [PNG](outputs/lj_step_convergence/figures/convergence_loglog.png) | [PDF](outputs/lj_step_convergence/figures/convergence_loglog.pdf) |
+| **Figure 3.** Reconstructed relative-displacement errors | [PNG](outputs/lj_step_convergence/figures/relative_convergence_loglog.png) | [PDF](outputs/lj_step_convergence/figures/relative_convergence_loglog.pdf) |
 
-The [tables folder](outputs/lj_step_convergence/tables/) contains all saved error
-values, fitted slopes, adjacent rates, accuracy budgets, and endpoint diagnostics.
+The [tables folder](outputs/lj_step_convergence/tables/) contains errors, fitted
+slopes, rates, and diagnostics. Rendering saves PNG/PDF files without opening
+windows and replaces the selected dataset's **entire `figures/` and `tables/`
+directories**, including manual additions. Saved profiles remain unchanged.
 
-Figures are saved without opening image windows. Successful rendering replaces
-the entire `figures/` and `tables/` directories in the selected dataset,
-including extra files or manual edits there. Saved profiles, the publication
-manifest, and the verification report are not changed by rendering.
+## Further details
 
-To render another complete, compatible dataset, select its folder:
-
-```text
-python main.py --plot N=320 --data-dir outputs/lj_step_convergence_fresh
-```
-
-That folder must already contain compatible profiles and their matching
-`publication_manifest.json`. It is used for both inputs and generated outputs.
-
-## Package contents
-
-```text
-main.py                          # Root launcher
-requirements.txt                 # Forwards the experiment's pinned dependency list
-experiments/lj_step_convergence/  # Self-contained source and detailed documentation
-outputs/lj_step_convergence/
-  profiles/                      # One continuum and twelve atomistic bundles
-  publication_manifest.json      # Configuration and profile integrity information
-  verification.json              # Saved numerical validation evidence
-  figures/
-  tables/
-```
-
-Keep the complete repository intact. The root `main.py` is a convenience
-launcher: it runs `experiments/lj_step_convergence/main.py` and forwards the
-command-line arguments. Both entry points use the same implementation and
-produce the same results for the same arguments, dataset, and environment.
-
-For example, from the repository root these commands are equivalent:
-
-```text
-python main.py --plot N=320
-python experiments/lj_step_convergence/main.py --plot N=320
-```
-
-## Numerical details and advanced modes
-
-See the [experiment README](experiments/lj_step_convergence/README.md) for the
-model, coordinates, error definitions, validation criteria, source organization,
-and full preparation workflow.
-
-`python main.py --verify` performs fresh checks of all saved endpoints without
-optimization. Ordinary rendering only checks the stored dataset and uses saved
-values; it does not repeat that numerical validation.
-
-`--prepare` explicitly constructs or resumes profiles in a new data folder.
-Fresh preparation is expensive and has a cumulative eight-hour numerical
-budget. Use the detailed instructions [experiment README](experiments/lj_step_convergence/README.md) 
-before starting it. With a complete,
-compatible dataset, `--prepare` only renders the saved results.
-`--plot`, `--verify`, and `--prepare` are mutually exclusive.
+See the [experiment README](experiments/lj_step_convergence/README.md) for
+mathematical definitions, validation, changing LJ parameters, preparation,
+and source organization.
 
 ## Citation
 
-If you use this package in research, please cite the associated paper:
+Please cite Hao Lan, Michael Hott, Jeff Calder, and Alexander B. Watson,
+*Continuum Limit for One-Dimensional Moiré Relaxation*,
+[arXiv:2609.37943](https://arxiv.org/abs/2609.37943) (2026).
 
-Hao Lan, Michael Hott, Jeff Calder, and Alexander B. Watson.
-*Continuum Limit for One-Dimensional Moiré Relaxation*.
-arXiv:2609.37943 (2026). [Paper and version history](https://arxiv.org/abs/2609.37943).
+<details>
+<summary>BibTeX</summary>
 
 ```bibtex
 @misc{lan2026continuum,
@@ -171,3 +98,5 @@ arXiv:2609.37943 (2026). [Paper and version history](https://arxiv.org/abs/2609.
   url = {https://arxiv.org/abs/2609.37943}
 }
 ```
+
+</details>
